@@ -1,0 +1,2 @@
+curl -O http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win32-bin.zip
+curl -O http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip
