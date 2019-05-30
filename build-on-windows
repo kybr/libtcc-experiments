@@ -6,5 +6,6 @@ cp -n use-tcc.c use-libtcc.c tcc
 cd tcc
 ./tcc.exe use-tcc.c
 ./use-tcc.exe
+# just put the dll on the build line!
 ./tcc.exe use-libtcc.c -I libtcc libtcc.dll
 ./use-libtcc.exe
