@@ -1,0 +1,10 @@
+#!/bin/sh
+
+curl -LO http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip
+unzip tcc-0.9.27-win64-bin.zip
+cp -n use-tcc.c use-libtcc.c tcc
+cd tcc
+./tcc.exe use-tcc.c
+./use-tcc.exe
+./tcc.exe use-libtcc.c -I libtcc libtcc.dll
+./use-libtcc.exe
