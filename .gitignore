@@ -1,2 +1,7 @@
 tcc/
 tcc-0.9.27-win64-bin.zip
+tcc-0.9.27-win32-bin.zip
+*.obj
+*.exe
+*.lib
+*.dll
