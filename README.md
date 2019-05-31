@@ -10,9 +10,8 @@ See `build-on-windows`.
 3. Open a MSVC development terminal and navigate to X
 4. Copy `use-libtcc.cpp` from this repository to X
 5. From X, run these MSVC commands:
-
-    lib /def:libtcc\libtcc.def /out:libtcc.lib
-    cl /MD use-libtcc.cpp -I libtcc libtcc.lib
-    use-libtcc.exe
+  + `lib /def:libtcc\libtcc.def /out:libtcc.lib`
+  + `cl /MD use-libtcc.cpp -I libtcc libtcc.lib`
+  + `use-libtcc.exe`
 
 The first command makes a .lib from the libtcc.def and libtcc.dll files. The second command compiles and links.
