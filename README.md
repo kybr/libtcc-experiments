@@ -24,34 +24,7 @@ cd tinycc/win32
 build-tcc.bat -c cl -i c:\tcc-cl
 build-tcc.bat -clean
 tcc -vv                           :: confirm a working tcc in c:\tcc-cl
-build-tcc.bat -c tcc -i c:\tcc
-build-tcc.bat -clean
-c:\tcc\tcc.exe -vv                :: confirm a working tcc in c:\tcc
-```
 
-**Remove `c:\tcc-cl` from the system PATH**
-
-**In GIT BASH:**
-```
-cd tinycc
-tcc tests/libtcc_test.c -I /c/tcc/libtcc /c/tcc/libtcc/libtcc.def 
-libtcc_test.exe
-```
-
-
-```
-tinycc\win32>c:\tcc\tcc.exe -vv
-tcc version 0.9.27 (x86_64 Windows)
-install: c:/tcc
-include:
-  c:/tcc/include
-  c:/tcc/include/winapi
-libraries:
-  c:/tcc/lib
-  C:/Windows/system32
-libtcc1:
-  c:/tcc/lib/libtcc1-64.a
-tinycc\win32>c:\tcc-cl\tcc.exe -vv
 tcc version 0.9.27 (x86_64 Windows)
 install: c:/tcc-cl
 include:
@@ -62,8 +35,34 @@ libraries:
   C:/Windows/system32
 libtcc1:
   c:/tcc-cl/lib/libtcc1-64.a
+  
+build-tcc.bat -c tcc -i c:\tcc
+build-tcc.bat -clean
+c:\tcc\tcc.exe -vv                :: confirm a working tcc in c:\tcc
+
+tcc version 0.9.27 (x86_64 Windows)
+install: c:/tcc
+include:
+  c:/tcc/include
+  c:/tcc/include/winapi
+libraries:
+  c:/tcc/lib
+  C:/Windows/system32
+libtcc1:
+  c:/tcc/lib/libtcc1-64.a
 ```
 
+(Find logs of these builds in `build-log-tcc-cl.txt` and `build-log-tcc.txt`.)
+
+
+**Remove `c:\tcc-cl` from the system PATH**
+
+**In GIT BASH:**
+```
+cd tinycc
+tcc tests/libtcc_test.c -I /c/tcc/libtcc /c/tcc/libtcc/libtcc.def 
+libtcc_test.exe
+```
 
 
 ## Build against TCC
