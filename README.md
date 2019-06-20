@@ -38,6 +38,34 @@ tcc tests/libtcc_test.c -I /c/tcc/libtcc /c/tcc/libtcc/libtcc.def
 libtcc_test.exe
 ```
 
+
+```
+tinycc\win32>c:\tcc\tcc.exe -vv
+tcc version 0.9.27 (x86_64 Windows)
+install: c:/tcc
+include:
+  c:/tcc/include
+  c:/tcc/include/winapi
+libraries:
+  c:/tcc/lib
+  C:/Windows/system32
+libtcc1:
+  c:/tcc/lib/libtcc1-64.a
+tinycc\win32>c:\tcc-cl\tcc.exe -vv
+tcc version 0.9.27 (x86_64 Windows)
+install: c:/tcc-cl
+include:
+  c:/tcc-cl/include
+  c:/tcc-cl/include/winapi
+libraries:
+  c:/tcc-cl/lib
+  C:/Windows/system32
+libtcc1:
+  c:/tcc-cl/lib/libtcc1-64.a
+```
+
+
+
 ## Build against TCC
 
 1. Download the win32 version of TCC from here: <http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win32-bin.zip>
