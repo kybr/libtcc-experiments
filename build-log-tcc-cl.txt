@@ -1,105 +1,55 @@
-C:\Users\ky\tinycc\win32>build-tcc.bat -c cl -i c:\tcc-cl
+tinycc\win32> build-tcc.bat -c cl -i c:\tcc-cl
+tinycc\win32> echo #define TCC_VERSION "0.9.27" 1>..\config.h
+tinycc\win32> echo #ifdef TCC_TARGET_X86_64 1>>..\config.h
+tinycc\win32> echo #define TCC_LIBTCC1 "libtcc1-64.a" 1>>..\config.h
+tinycc\win32> echo #else 1>>..\config.h
+tinycc\win32> echo #define TCC_LIBTCC1 "libtcc1-32.a" 1>>..\config.h
+tinycc\win32> echo #endif 1>>..\config.h
+tinycc\win32> echo #define TCC_IS_NATIVE 1>>..\config.h
+tinycc\win32> for %f in (*tcc.exe *tcc.dll) do @del %f
+tinycc\win32> cl -Felibtcc.dll -LD ..\libtcc.c -DTCC_TARGET_PE -DTCC_TARGET_X86_64 -DLIBTCC_AS_DLL -O1 -W2 -Zi -MT -GS- -nologo -link -opt:ref,icf
 
-C:\Users\ky\tinycc\win32>echo #define TCC_VERSION "0.9.27" 1>..\config.h
+library libtc c.lib and object libtcc.exp
+tinycc\win32> cl -Fetcc.exe ..\tcc.c libtcc.lib -DTCC_TARGET_PE -DTCC_TARGET_X86_64 -DONE_SOURCE"=0" -O1 -W2 -Zi -MT -GS- -nologo -link -opt:ref,icf
 
-C:\Users\ky\tinycc\win32>echo #ifdef TCC_TARGET_X86_64 1>>..\config.h
+tinycc\win32> cl -Fei386-win32-tcc.exe ..\tcc.c -DTCC_TARGET_PE -DTCC_TARGET_I386 -O1 -W2 -Zi -MT -GS- -nologo -link -opt:ref,icf
 
-C:\Users\ky\tinycc\win32>echo #define TCC_LIBTCC1 "libtcc1-64.a" 1>>..\config.h
-
-C:\Users\ky\tinycc\win32>echo #else 1>>..\config.h
-
-C:\Users\ky\tinycc\win32>echo #define TCC_LIBTCC1 "libtcc1-32.a" 1>>..\config.h
-
-C:\Users\ky\tinycc\win32>echo #endif 1>>..\config.h
-
-C:\Users\ky\tinycc\win32>echo #define TCC_IS_NATIVE 1>>..\config.h
-
-C:\Users\ky\tinycc\win32>for %f in (*tcc.exe *tcc.dll) do @del %f
-
-C:\Users\ky\tinycc\win32>cl -Felibtcc.dll -LD ..\libtcc.c -DTCC_TARGET_PE -DTCC_TARGET_X86_64 -DLIBTCC_AS_DLL -O1 -W2 -Zi -MT -GS- -nologo -link -opt:ref,icf
-libtcc.c
-   Creating library libtcc.lib and object libtcc.exp
-
-C:\Users\ky\tinycc\win32>cl -Fetcc.exe ..\tcc.c libtcc.lib -DTCC_TARGET_PE -DTCC_TARGET_X86_64 -DONE_SOURCE"=0" -O1 -W2 -Zi -MT -GS- -nologo -link -opt:ref,icf
-tcc.c
-
-C:\Users\ky\tinycc\win32>cl -Fei386-win32-tcc.exe ..\tcc.c -DTCC_TARGET_PE -DTCC_TARGET_I386 -O1 -W2 -Zi -MT -GS- -nologo -link -opt:ref,icf
-tcc.c
-
-C:\Users\ky\tinycc\win32>if not exist libtcc mkdir libtcc
-
-C:\Users\ky\tinycc\win32>if not exist doc mkdir doc
-
-C:\Users\ky\tinycc\win32>copy ..\include\*.h include 1>nul
-
-C:\Users\ky\tinycc\win32>copy ..\tcclib.h include 1>nul
-
-C:\Users\ky\tinycc\win32>copy ..\libtcc.h libtcc 1>nul
-
-C:\Users\ky\tinycc\win32>copy ..\tests\libtcc_test.c examples 1>nul
-
-C:\Users\ky\tinycc\win32>copy tcc-win32.txt doc 1>nul
-
-C:\Users\ky\tinycc\win32>.\tcc -impdef libtcc.dll -o libtcc\libtcc.def
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c ../lib/libtcc1.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c lib/crt1.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c lib/crt1w.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c lib/wincrt1.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c lib/wincrt1w.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c lib/dllcrt1.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c lib/dllmain.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c lib/chkstk.S
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -w -c ../lib/bcheck.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c ../lib/alloca86.S
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -c ../lib/alloca86-bt.S
-
-C:\Users\ky\tinycc\win32>.\tcc -m32 -ar lib/libtcc1-32.a libtcc1.o crt1.o crt1w.o wincrt1.o wincrt1w.o dllcrt1.o dllmain.o chkstk.o bcheck.o alloca86.o alloca86-bt.o
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c ../lib/libtcc1.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c lib/crt1.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c lib/crt1w.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c lib/wincrt1.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c lib/wincrt1w.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c lib/dllcrt1.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c lib/dllmain.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c lib/chkstk.S
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -w -c ../lib/bcheck.c
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c ../lib/alloca86_64.S
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -c ../lib/alloca86_64-bt.S
-
-C:\Users\ky\tinycc\win32>.\tcc -m64 -ar lib/libtcc1-64.a libtcc1.o crt1.o crt1w.o wincrt1.o wincrt1w.o dllcrt1.o dllmain.o chkstk.o bcheck.o alloca86_64.o alloca86_64-bt.o
-
-C:\Users\ky\tinycc\win32>for %f in (*.o *.def) do @del %f
-
-C:\Users\ky\tinycc\win32>if not exist c:\tcc-cl mkdir c:\tcc-cl
-
-C:\Users\ky\tinycc\win32>if not exist c:\tcc-cl mkdir c:\tcc-cl
-
-C:\Users\ky\tinycc\win32>for %f in (*tcc.exe *tcc.dll) do @copy %f c:\tcc-cl\%f 1>nul
-
-C:\Users\ky\tinycc\win32>for %f in (lib\*.a lib\*.def) do @copy %f c:\tcc-cl\%f 1>nul
-
-C:\Users\ky\tinycc\win32>for %f in (include examples libtcc doc) do @xcopy /s/i/q/y %f c:\tcc-cl\%f 1>nul
-
-C:\Users\ky\tinycc\win32>exit /B 0
+tinycc\win32> if not exist libtcc mkdir libtcc
+tinycc\win32> if not exist doc mkdir doc
+tinycc\win32> copy ..\include\*.h include 1>nul
+tinycc\win32> copy ..\tcclib.h include 1>nul
+tinycc\win32> copy ..\libtcc.h libtcc 1>nul
+tinycc\win32> copy ..\tests\libtcc_test.c examples 1>nul
+tinycc\win32> copy tcc-win32.txt doc 1>nul
+tinycc\win32> .\tcc -impdef libtcc.dll -o libtcc\libtcc.def
+tinycc\win32> .\tcc -m32 -c ../lib/libtcc1.c
+tinycc\win32> .\tcc -m32 -c lib/crt1.c
+tinycc\win32> .\tcc -m32 -c lib/crt1w.c
+tinycc\win32> .\tcc -m32 -c lib/wincrt1.c
+tinycc\win32> .\tcc -m32 -c lib/wincrt1w.c
+tinycc\win32> .\tcc -m32 -c lib/dllcrt1.c
+tinycc\win32> .\tcc -m32 -c lib/dllmain.c
+tinycc\win32> .\tcc -m32 -c lib/chkstk.S
+tinycc\win32> .\tcc -m32 -w -c ../lib/bcheck.c
+tinycc\win32> .\tcc -m32 -c ../lib/alloca86.S
+tinycc\win32> .\tcc -m32 -c ../lib/alloca86-bt.S
+tinycc\win32> .\tcc -m32 -ar lib/libtcc1-32.a libtcc1.o crt1.o crt1w.o wincrt1.o wincrt1w.o dllcrt1.o dllmain.o chkstk.o bcheck.o alloca86.o alloca86-bt.o
+tinycc\win32> .\tcc -m64 -c ../lib/libtcc1.c
+tinycc\win32> .\tcc -m64 -c lib/crt1.c
+tinycc\win32> .\tcc -m64 -c lib/crt1w.c
+tinycc\win32> .\tcc -m64 -c lib/wincrt1.c
+tinycc\win32> .\tcc -m64 -c lib/wincrt1w.c
+tinycc\win32> .\tcc -m64 -c lib/dllcrt1.c
+tinycc\win32> .\tcc -m64 -c lib/dllmain.c
+tinycc\win32> .\tcc -m64 -c lib/chkstk.S
+tinycc\win32> .\tcc -m64 -w -c ../lib/bcheck.c
+tinycc\win32> .\tcc -m64 -c ../lib/alloca86_64.S
+tinycc\win32> .\tcc -m64 -c ../lib/alloca86_64-bt.S
+tinycc\win32> .\tcc -m64 -ar lib/libtcc1-64.a libtcc1.o crt1.o crt1w.o wincrt1.o wincrt1w.o dllcrt1.o dllmain.o chkstk.o bcheck.o alloca86_64.o alloca86_64-bt.o
+tinycc\win32> for %f in (*.o *.def) do @del %f
+tinycc\win32> if not exist c:\tcc-cl mkdir c:\tcc-cl
+tinycc\win32> if not exist c:\tcc-cl mkdir c:\tcc-cl
+tinycc\win32> for %f in (*tcc.exe *tcc.dll) do @copy %f c:\tcc-cl\%f 1>nul
+tinycc\win32> for %f in (lib\*.a lib\*.def) do @copy %f c:\tcc-cl\%f 1>nul
+tinycc\win32> for %f in (include examples libtcc doc) do @xcopy /s/i/q/y %f c:\tcc-cl\%f 1>nul
+tinycc\win32> exit /B 0
