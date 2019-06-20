@@ -16,3 +16,32 @@ See `build-on-windows`.
     use-libtcc.exe
 
 The first command makes a .lib from the libtcc.def and libtcc.dll files. The second command compiles and links.
+
+
+- - - 
+
+- preparation:
+  + install MSVC tools (choco install visualstudio2017-workload-vctools)
+  + install git bash (choco install git)
+  + make folders: "c:\tcc-cl" and "c:\tcc"
+  + put both of those fodlers in the system PATH
+- in GIT BASH:
+  + git clone git://repo.or.cz/tinycc.git
+  + edit tinycc/win32/build-tcc.bat adding to "build-tcc.bat"
+    * echo>> ..\config.h #define TCC\_IS\_NATIVE
+    * otherwise we don't get tcc\_relocate
+    * see the example in this folder
+- in Developer Command Prompt
+  + cd tinycc/win32
+  + build-tcc.bat -c cl -i c:\tcc-cl
+  + build-tcc.bat -clean
+  + confirm a working tcc in c:\tcc-cl by saying "tcc -vv"
+  + build-tcc.bat -c tcc -i c:\tcc
+  + build-tcc.bat -clean
+  + confirm a working tcc in c:\tcc by saying "c:\tcc\tcc.exe -vv"
+- REMOVE c:\tcc-cl from the system PATH
+- in GIT BASH:
+  + cd tinycc
+  + tcc tests/libtcc\_test.c -I /c/tcc/libtcc /c/tcc/libtcc/libtcc.def 
+  + libtcc\_test.exe
+
