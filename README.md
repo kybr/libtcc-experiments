@@ -2,21 +2,6 @@
 
 Currently, we are working on how to build against libtcc on Windows.
 
-See `build-on-windows`.
-
-
-1. Download the win32 version of TCC from here: <http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win32-bin.zip>
-2. Expand the .zip somewhere (call it X)
-3. Open a MSVC development terminal and navigate to X
-4. Copy `use-libtcc.cpp` from this repository to X
-5. From X, run these MSVC commands:
-  + `lib /def:libtcc\libtcc.def /out:libtcc.lib`
-  + `cl /MD use-libtcc.cpp -I libtcc libtcc.lib`
-  + `use-libtcc.exe`
-
-The first command makes a .lib from the libtcc.def and libtcc.dll files. The second command compiles and links.
-
-
 ## Installation
 
 To "install" the latest Tiny C Compiler on Windows, we build from source:
@@ -38,17 +23,31 @@ To "install" the latest Tiny C Compiler on Windows, we build from source:
 cd tinycc/win32
 build-tcc.bat -c cl -i c:\tcc-cl
 build-tcc.bat -clean
-tcc -vv                               :: confirm a working tcc in c:\tcc-cl
+tcc -vv                           :: confirm a working tcc in c:\tcc-cl
 build-tcc.bat -c tcc -i c:\tcc
 build-tcc.bat -clean
-c:\tcc\tcc.exe -vv                    :: confirm a working tcc in c:\tcc by saying
+c:\tcc\tcc.exe -vv                :: confirm a working tcc in c:\tcc
 ```
 
 **Remove `c:\tcc-cl` from the system PATH**
 
-**in GIT BASH:**
+**In GIT BASH:**
 ```
 cd tinycc
 tcc tests/libtcc_test.c -I /c/tcc/libtcc /c/tcc/libtcc/libtcc.def 
 libtcc_test.exe
 ```
+
+## Build against TCC
+
+1. Download the win32 version of TCC from here: <http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win32-bin.zip>
+2. Expand the .zip somewhere (call it X)
+3. Open a MSVC development terminal and navigate to X
+4. Copy `use-libtcc.cpp` from this repository to X
+5. From X, run these MSVC commands:
+  + `lib /def:libtcc\libtcc.def /out:libtcc.lib`
+  + `cl /MD use-libtcc.cpp -I libtcc libtcc.lib`
+  + `use-libtcc.exe`
+
+The first command makes a .lib from the libtcc.def and libtcc.dll files. The second command compiles and links.
+
