@@ -24,35 +24,26 @@ cd tinycc/win32
 build-tcc.bat -c cl -i c:\tcc-cl
 build-tcc.bat -clean
 tcc -vv                           :: confirm a working tcc in c:\tcc-cl
-
-tcc version 0.9.27 (x86_64 Windows)
-install: c:/tcc-cl
-include:
-  c:/tcc-cl/include
-  c:/tcc-cl/include/winapi
-libraries:
-  c:/tcc-cl/lib
-  C:/Windows/system32
-libtcc1:
-  c:/tcc-cl/lib/libtcc1-64.a
-  
 build-tcc.bat -c tcc -i c:\tcc
 build-tcc.bat -clean
 c:\tcc\tcc.exe -vv                :: confirm a working tcc in c:\tcc
-
-tcc version 0.9.27 (x86_64 Windows)
-install: c:/tcc
-include:
-  c:/tcc/include
-  c:/tcc/include/winapi
-libraries:
-  c:/tcc/lib
-  C:/Windows/system32
-libtcc1:
-  c:/tcc/lib/libtcc1-64.a
 ```
 
 (Find logs of these builds in `build-log-tcc-cl.txt` and `build-log-tcc.txt`.)
+
+
+**In Developer Command Prompt:** (optional)
+
+```
+cd c:\tcc                         
+lib /machine:x86 /def:libtcc\libtcc.def /out:libtcc.lib
+lib /machine:x64 /def:libtcc\libtcc.def /out:libtcc64.lib
+cd c:\tcc-cl
+lib /machine:x86 /def:libtcc\libtcc.def /out:libtcc.lib
+lib /machine:x64 /def:libtcc\libtcc.def /out:libtcc64.lib
+```
+
+(The stuff above is necessary if we later want to use cl.exe to build against libtcc.)
 
 
 **Remove `c:\tcc-cl` from the system PATH**
@@ -65,16 +56,16 @@ libtcc_test.exe
 ```
 
 
+
+
 ## Build against TCC
 
-1. Download the win32 version of TCC from here: <http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win32-bin.zip>
-2. Expand the .zip somewhere (call it X)
-3. Open a MSVC development terminal and navigate to X
-4. Copy `use-libtcc.cpp` from this repository to X
-5. From X, run these MSVC commands:
-  + `lib /def:libtcc\libtcc.def /out:libtcc.lib`
-  + `cl /MD use-libtcc.cpp -I libtcc libtcc.lib`
-  + `use-libtcc.exe`
+Use the x64 Developer Command Prompt. Start a cmd.exe and do:
 
-The first command makes a .lib from the libtcc.def and libtcc.dll files. The second command compiles and links.
+%comspec% /k "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+
+```
+cl /MD use-libtcc.cpp /I c:\tcc\libtcc c:\tcc\libtcc64.lib
+use-libtcc.exe
+```
 
